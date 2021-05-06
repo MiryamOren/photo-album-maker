@@ -2,6 +2,10 @@
   "name": "final-project",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "npm": "7.7.6",
+    "node": "15.14.0"
+  },
   "main": "./server/index.js",
   "scripts": {
     "start": "node ./server/index.js",
