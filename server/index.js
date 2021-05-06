@@ -14,8 +14,14 @@ app.use(express.json());
 app.use(userRouter);
 app.use(imageRouter);
 
-const pathToClientBuild = path.join(__dirname, '../client/build');
-console.log(pathToClientBuild);
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static(path.join(__dirname, "../client/build")));
+} else {
+  app.use(express.static(path.join(__dirname, "../client/public")));
+}
+
+// const pathToClientBuild = path.join(__dirname, '../client/build');
+// console.log(pathToClientBuild);
 
 const port = process.env.PORT || 3001;
 app.use(express.static(pathToClientBuild));
