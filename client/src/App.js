@@ -13,7 +13,6 @@ import axios from "axios";
 import Redirect from './pages/redirect/redirect'
 import Home from './pages/home/home'
 function App() {
-  console.log('push to git ')
   const APIpath = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api';
   const [dataFromServer, setDataFromServer] = useState('')
   const [user, setUser] = useState(null);
