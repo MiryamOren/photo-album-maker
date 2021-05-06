@@ -24,7 +24,7 @@ if (process.env.NODE_ENV === "production") {
 // console.log(pathToClientBuild);
 
 const port = process.env.PORT || 3001;
-app.use(express.static(pathToClientBuild));
+// app.use(express.static(pathToClientBuild));
 
 app.listen(port, () => {
   console.log(`we are live on ${port}`);
