@@ -1,34 +1,87 @@
 const express = require('express')
-const multer = require("multer");
 const sharp = require('sharp');
+const auth = require('../middleware/authentication')
+const upload = require('../middleware/multer');
 const {
   addImage,
-} = require('../utils/user');
+  addImageToAlbum,
+  putImageAlbums,
+  deleteImage,
+} = require('../utils/image');
+
+const User = require('../models/user');
+const { findOneAndUpdate } = require('../models/user');
 const router = express.Router();
 
-const upload = multer({
-  limits: {
-    fileSize: 1000000,
-  },
-  fileFilter(req, file, cb) {
-    if (!file.originalname.match(/\.(jpg|JPG|jpdeg|JPEG|png|PNG|jpeg)$/)) {
-      return cb(new Error("File must be a JPG or PNG image"));
-    }
-    cb(undefined, true);
-  },
-});
-
-router.post( "/api/images/upload", upload.single("image"), async (req, res) => {
-  try{
+// >>>>>>>>>>>> Upload Image <<<<<<<<<<<<<< //
+router.post("/api/images/upload", auth, upload.single("image"), async (req, res) => {
+  try {
     const buffer = await sharp(req.file.buffer)
       .png()
       .resize({ width: 150, height: 150 })
       .toBuffer();
-    console.log(buffer)
-    await addImage(req.body.userName, buffer)
+    await addImage(req.user._id, buffer)
     res.send(buffer);
-  }catch(e){
-    console.log(e)
+  } catch (err) {
+    res.status(400).send(err.message);
   }
 });
+// >>>>>>>>>>>> Get all user images <<<<<<<<<<<<<< //
+router.get("/api/images/all", auth, async (req, res) => {
+  try {
+    res.status(200).send(req.user.images);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+// >>>>>>>>>>>> Get images of spesific album <<<<<<<<<<<<<< //
+router.get("/api/images/album/:albumName", auth, async (req, res) => {
+  try {
+    const images = req.user.images.filter(image => image.albumsNames.includes(req.params.albumName));
+    console.log(images.length)
+    res.status(200).send(images);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+// >>>>>>>>>>>> Add a image to an album - add an album to the album array of the image <<<<<<<<<<<<<< //
+router.patch("/api/images/add-image-to-album", auth, async (req, res) => {
+  console.log(req.body)
+  try {
+    const user = addImageToAlbum(req.user._id ,req.body.imageID, req.body.albumName);
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
+// >>>>>>>>>>>> Put Image AlbumsNames Array <<<<<<<<<<<<<< //
+router.patch("/api/images/put-image-albums-names", auth, async (req, res) => {
+  console.log(req.body)
+  try {
+    const user = putImageAlbums(req.user._id ,req.body.imageID, req.body.albumNames);
+    res.status(200).send(user);
+  } catch (err) {
+    res.status(400).send(err.message);
+  }
+});
+
+// >>>>>>>>>>>> Delete image <<<<<<<<<<<<<< //
+router.patch("/api/images/delete", auth, async (req, res) => {
+  try {
+    const result = await deleteImage(req.user._id ,req.body.imageID)
+    res.status(200).send(result);
+  } catch(err) {
+    res.status(400).send(err.message);
+  }
+});
+
+router.post("/api/try/:album", async (req, res) => {
+  console.log(req.params.album)
+  try {
+    res.send(req.params.album)
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+})
 module.exports = router;

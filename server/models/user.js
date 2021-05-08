@@ -9,7 +9,7 @@ const ImageSchema = new mongoose.Schema({
     required: true,
   },
   albumsNames: [{
-
+    type: String
   }]
 })
 const userSchema = new mongoose.Schema({
@@ -39,6 +39,9 @@ const userSchema = new mongoose.Schema({
     required: [true, 'password is required'],
   },
   images: [ImageSchema],
+  albumsNames: [{
+    type: String
+  }],
   tokens: [
     {
       token: {
@@ -57,7 +60,7 @@ userSchema.pre('save', async function (next) {
   next();
 });
 
-// find user by email & validate the password
+// find user by userName & validate the password
 userSchema.statics.findByCredentials = async (userName, password) => {
   const user = await User.findOne({ userName });
   if (!user) {
@@ -73,28 +76,13 @@ userSchema.statics.findByCredentials = async (userName, password) => {
 // generate AuthToken
 userSchema.methods.generateAuthToken = async function () {
   const user = this
-  const token = jwt.sign({ _id: user._id.toString() }, 'my-secret')
+  const token = jwt.sign({ _id: user._id.toString() }, 'my-secret', { expiresIn: '1 day' })
 
   user.tokens = user.tokens.concat({ token })
   await user.save()
 
   return token
 }
-
-// UserSchema.pre('save', async function (next) {
-//   this.tokens.push(await jwt.sign({ id: this._id }, 'password'));
-//   this.password = await bcrypt.hash(this.password, 7);
-//   next();
-// });
-// UserSchema.methods.toJSON = function () {
-//   //i wanted to copy this into copy of it,but it's only reference and if i delete password or tokens it won't delete
-//   const allowedKeys = Object.keys(this._doc).filter(
-//     (key) => key !== 'password' && key !== 'tokens'
-//   );
-//   let filterUser = {};
-//   allowedKeys.forEach((key) => (filterUser[key] = this[key]));
-//   return filterUser;
-// };
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;

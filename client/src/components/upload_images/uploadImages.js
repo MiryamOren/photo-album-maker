@@ -6,14 +6,16 @@ import axios from 'axios'
 const ReactUploadImage = ({user, reRender, APIpath})=>{
     const [image, setImage]= useState(null)
     
-    const handleUpload=async () => {
+    const handleUpload= async () => {
         const formData = new FormData();
         formData.append('image',image);
-        formData.append('userName',user.userName);
+        // formData.append('userName',user.userName);
+        const token = await localStorage.getItem("token");
         const response= await axios.post(APIpath + '/images/upload', formData,
             {
             headers: {
-                userName: user.userName,
+                // userName: user.userName,
+                'Authorization': `Bearer ${token}`,
                 "content-type":
                 "multipart/form-data; boundary=<calculated when request is sent>",
             },
