@@ -8,9 +8,10 @@ const {
   putImageAlbums,
   deleteImage,
 } = require('../utils/image');
+const { updateUserAlbums } = require('../utils/user');
 
-const User = require('../models/user');
-const { findOneAndUpdate } = require('../models/user');
+// const User = require('../models/user');
+// const { findOneAndUpdate } = require('../models/user');
 const router = express.Router();
 
 // >>>>>>>>>>>> Upload Image <<<<<<<<<<<<<< //
@@ -59,7 +60,8 @@ router.patch("/api/images/add-image-to-album", auth, async (req, res) => {
 router.patch("/api/images/put-image-albums-names", auth, async (req, res) => {
   console.log(req.body)
   try {
-    const user = putImageAlbums(req.user._id ,req.body.imageID, req.body.albumNames);
+    const user = await putImageAlbums(req.user._id ,req.body.imageID, req.body.albumNames);
+    await updateUserAlbums(req.user._id);
     res.status(200).send(user);
   } catch (err) {
     res.status(400).send(err.message);

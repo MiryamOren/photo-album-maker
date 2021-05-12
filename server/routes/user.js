@@ -40,4 +40,12 @@ router.get('/api/users/user', auth, async function (req, res) {
   }
 });
 
+router.get('/api/users/is-user', auth, async function (req, res) {
+  try {
+    res.status(201).send(true);
+  } catch (e) {
+    res.status(400).send(e.message);
+  }
+});
+
 module.exports = router;

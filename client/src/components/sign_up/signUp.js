@@ -18,17 +18,17 @@ function SignUp({ APIpath, setUserFunc }) {
       <InputWithLabale 
         label="user name" 
         inputType="text" 
-        callback={e => setUser({...user, userName: e.target.value})}
+        callback={value => setUser({...user, userName: value})}
       />
       <InputWithLabale 
         label="name" 
         inputType="text" 
-        callback={e => setUser({...user, name: e.target.value})}
+        callback={value => setUser({...user, name: value})}
       />
       <InputWithLabale 
         label="password" 
         inputType="password" 
-        callback={e => setUser({...user, password: e.target.value})}
+        callback={value => setUser({...user, password: value})}
       />
       <button onClick={signUp}>Log in</button>
     </div>

@@ -12,26 +12,26 @@ import axios from 'axios';
 import UploadImages from '../../components/upload_images/uploadImages';
 import ImageGallery from '../../components/image_gallery/imageGallery';
 
-function Home({user, APIpath, setAlbumPath}) {
-  const [imagesArr, SetImagesArr] = useState([]);
-  const [newImage, SetNewImage] = useState(false);
-  const [albumsList, setAlbumsList] = useState('');
+function Home({ APIpath, user, refreshFunc }) {
+  const imagesArr = user.images;
+  // const [newImage, SetNewImage] = useState(false);
+  const albumsList = user.albumsNames;
+
   console.log(user)
-  useEffect(() => {
-    const getUser = async() => {
-      const token = await localStorage.getItem("token");
-      const res = await axios.get( APIpath + '/users/user',
-        {headers: { 'Authorization': `Bearer ${token}` }});
-      SetImagesArr(res.data.images)
-      setAlbumsList(res.data.albumsNames[0])
-      setAlbumPath(res.data.albumsNames[0])
-    }
-    getUser();
-  }, [newImage])
+
+  const renderAlbumsLinks = () => {
+    if (!user) {return null}
+    return (
+        <ul>
+          {albumsList.map(album => <li key={album}><Link to={`/${user.userName}/albums/${album}`}>{album}</Link></li>)}
+        </ul>
+    )
+  }
   return(
     <div>
-      <UploadImages user={user} reRender={() => SetNewImage(!newImage)} APIpath={APIpath}/>
+      <UploadImages user={user} reRender={refreshFunc} APIpath={APIpath}/>
       <ImageGallery imagesArr={imagesArr} APIpath={APIpath}/>
+      {renderAlbumsLinks()}
     </div>
   )
 }

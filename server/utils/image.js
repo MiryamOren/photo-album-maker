@@ -69,6 +69,7 @@ const putImageAlbums = async (userID ,imageID, albumsArr) => {
   }
 };
 
+
 const deleteImage = async (userID ,imageID) => {
   try {
     const user = await User.updateOne(

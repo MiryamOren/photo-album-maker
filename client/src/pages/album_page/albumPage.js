@@ -1,40 +1,21 @@
 import React, { useState, useEffect } from "react"
-import { useHistory } from "react-router-dom";
+import ReactDOM from "react-dom";
+import { useLocation, useParams } from "react-router-dom";
 import axios from 'axios';
 import ImageGallery from '../../components/image_gallery/imageGallery'
 
-function AlbumPage({APIpath}) {
-  const [imagesArr, SetImagesArr] = useState([]);
-  const [albumsList, setAlbumsList] = useState([]);
-  const [currentAlbum, setCurrentAlbum] = useState('')
-  useEffect(() => {
-    const getUser = async() => {
-      const token = await localStorage.getItem("token");
-      const res = await axios.get( APIpath + '/users/user',
-        {headers: { 'Authorization': `Bearer ${token}` }});
-      SetImagesArr(res.data.images)
-      setAlbumsList(res.data.albumsNames)
-      setCurrentAlbum(res.data.albumsNames[0])
-    }
-    getUser();
-  }, []);
+const AlbumPage = ({user, APIpath}) => {
+  const {userName, albumName} = useParams();
+  const imagesArr = user.images.filter(image => image.albumsNames.includes(albumName));
 
-  const renderAlbumsList = () => {
-    return (
-      <ul>
-        {albumsList.map(album => <li key={album} onClick={() => setCurrentAlbum(album)}>{album}</li>)}
-      </ul>
-    )
-  }
+  
   const renderGallery = () => {
-    const currentImagesArr = imagesArr.filter(image => image.albumsNames.includes(currentAlbum));
-    return <ImageGallery imagesArr={currentImagesArr} APIpath={APIpath}/>
+    return <ImageGallery imagesArr={imagesArr} APIpath={APIpath}/>
   }
   return(
     <div>
-      {renderAlbumsList()}
-      {renderGallery()}
       
+      {renderGallery()}
     </div>
   )
 }

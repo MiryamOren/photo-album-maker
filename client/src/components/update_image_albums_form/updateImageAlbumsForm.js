@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react"
 import InputWithLabale from '../input_with_labal/inputWithLabel'
 
-function UpdateImageAlbumsForm({currentAlbums, putAlbumsFunc}) {
+function UpdateImageAlbumsForm({currentAlbums, putAlbumsFunc, imageID}) {
+  console.log('in UpdateImageAlbumsForm. imageID is:' )
+  console.log(imageID)
   const [albums, setAlbums] = useState(currentAlbums);
   const [newAlbum, setNewAlbum] = useState('');
   const renderCurrentAlbums = () => {
@@ -36,7 +38,7 @@ function UpdateImageAlbumsForm({currentAlbums, putAlbumsFunc}) {
         }
       }}
       >add</button>
-      <button onClick={() => putAlbumsFunc(albums)}>confirm</button>
+      <button onClick={() => putAlbumsFunc({albums, imageID})}>confirm</button>
       <button onClick={() => putAlbumsFunc('cancel')}>cancel</button>
     </div>
   )

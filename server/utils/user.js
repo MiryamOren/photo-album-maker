@@ -18,7 +18,19 @@ const getUser = async (userName) => {
     return user;
 }
 
+const updateUserAlbums = async (userId) => {
+  const res = await User.findById(userId, async function (err, doc) {
+    if (err) {return err }
+    const albums =  doc.images.reduce((userAlbums, image) => userAlbums.concat(image.albumsNames), []);
+    doc.albumsNames = Array.from(new Set(albums));
+    await doc.save();
+    return doc;
+  });
+  return res;
+}
+
 module.exports = {
   createUser,
-  getUser
+  getUser,
+  updateUserAlbums,
 };

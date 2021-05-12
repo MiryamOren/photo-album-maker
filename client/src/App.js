@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import './App.css';
 import React, { useState, useEffect } from "react";
+import ReactDOM from "react-dom";
 import {
   BrowserRouter as Router,
   Switch,
@@ -14,29 +15,36 @@ import axios from "axios";
 import Redirect from './pages/redirect/redirect'
 import Home from './pages/home/home'
 import AlbumPage from './pages/album_page/albumPage'
+import Albums from './pages/albums/albums'
+import DragAndDrop from './components/test'
+import DragThingsToBoxesDemo from './DnD/DragThingsToBoxesDemo'
 function App() {
   const APIpath = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api';
-  const [dataFromServer, setDataFromServer] = useState('')
   const [user, setUser] = useState(null);
-  const [albumPath, setAlbumPath] = useState('')
-  console.log(albumPath)
-  // const { location } = useHistory();
-  // console.log(location);
-  useEffect(() => {
-    console.log(user)
-    const getDataFromServer = async () => {
-      try {
-        const getRes = await axios.get(APIpath)
-        setDataFromServer(getRes.data);
-        console.log(getRes.data)
-      } catch(e){
-        console.log(e)
-      }
+  const [render, SetRender] = useState(false)
+  
+  const getUser = async () => {
+    console.log('refresh user data. user:')
+    try {
+      const token = await localStorage.getItem("token");
+      SetRender(true);
+      const res = await axios.get( APIpath + '/users/user',
+        {headers: { 'Authorization': `Bearer ${token}` }});
+      
+      setUser(res.data);
+      console.log(res.data);
+    } catch(e){
+      console.log(e)
+      setUser(null);
     }
-    getDataFromServer();
+  }
+  useEffect(() => {    
+    getUser()
   }, [])
+
   return (
     <Router>
+      {render? 
       <div>
         <ul>
           <li>
@@ -45,26 +53,41 @@ function App() {
           <li>
             <Link to="/albums">Albums</Link>
           </li>
+          <li>
+            <Link to="/drag-and-drop">Drag And Drop</Link>
+          </li>
         </ul>
-        {dataFromServer}
         <Switch>
           <Route exact path="/">
             <Redirect
-              component={<Home user={user} APIpath={APIpath} setAlbumPath={setAlbumPath}/>}
+              component={<Home user={user} APIpath={APIpath} refreshFunc={getUser}/>}
               APIpath={APIpath}
+              user={user}
               setUserFunc={(user) => setUser(user)}
             />
           </Route>
           <Route path="/albums" exact>
             <Redirect
-              component={<AlbumPage user={user} APIpath={APIpath}/>}
+              component={<Albums user={user} APIpath={APIpath}/>}
               APIpath={APIpath}
+              user={user}
               setUserFunc={(user) => setUser(user)}
             />
           </Route>
+          <Route path="/:userName/albums/:albumName" exact >
+            <Redirect
+              component={<AlbumPage user={user} APIpath={APIpath} refreshFunc={getUser}s/>}
+              APIpath={APIpath}
+              user={user}
+              setUserFunc={(user) => setUser(user)}
+            />
+          </Route>
+          <Route path="/drag-and-drop" exact >
+            <DragThingsToBoxesDemo />
+          </Route>
         </Switch>
-      </div>
-    </Router>
+      </div> : null }
+    </Router> 
   ); 
 
 }
