@@ -10,6 +10,7 @@ export default class BoxItem extends React.Component {
     // the things that appear in the boxes
     constructor(props) {
       super(props);
+      console.log(this.props.image)
     }
     
     handleDrop = (e) => {
@@ -33,7 +34,7 @@ export default class BoxItem extends React.Component {
         <div className="box_item_component">
           <DragDropContainer
               targetKey="boxItem"
-              dragData={{label: this.props.children, index: this.props.index}}
+              dragData={{label: this.props.children, index: this.props.index, image: this.props.image}}
               onDrop={this.deleteMe}
               disappearDraggedElement={true}
               dragHandleClassName="grabber"
@@ -44,8 +45,9 @@ export default class BoxItem extends React.Component {
               >
                 <div className="outer">
                   <div className="item">
-                    <span className="grabber">&#8759;</span>
-                    {this.props.children}
+                    {/*<span className="grabber">&#8759;</span>
+      {this.props.children}*/}
+                    <img className="grabber" src={this.props.image} alt="" height="100px"/>
                   </div>
                 </div>
             </DropTarget>
