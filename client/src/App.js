@@ -16,8 +16,9 @@ import Redirect from './pages/redirect/redirect'
 import Home from './pages/home/home'
 import AlbumPage from './pages/album_page/albumPage'
 import Albums from './pages/albums/albums'
-import DragAndDrop from './components/test'
+// import DragAndDrop from './components/test'
 import DragThingsToBoxesDemo from './DnD/DragThingsToBoxesDemo'
+import EditPhotoBook from './pages/edit_photo_book/editPhotoBook'
 function App() {
   const APIpath = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api';
   const [user, setUser] = useState(null);
@@ -77,6 +78,14 @@ function App() {
           <Route path="/:userName/albums/:albumName" exact >
             <Redirect
               component={<AlbumPage user={user} APIpath={APIpath} refreshFunc={getUser}s/>}
+              APIpath={APIpath}
+              user={user}
+              setUserFunc={(user) => setUser(user)}
+            />
+          </Route>
+          <Route path="/:userName/edit-photo-book/:albumName/:template" exact >
+            <Redirect
+              component={<EditPhotoBook user={user} APIpath={APIpath}/>}
               APIpath={APIpath}
               user={user}
               setUserFunc={(user) => setUser(user)}

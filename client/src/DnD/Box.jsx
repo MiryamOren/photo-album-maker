@@ -38,7 +38,7 @@ export default class Box extends React.Component {
   
     kill = (uid) => {
       console.log('kill')
-      if (this.props.childs) {return}
+      // if (this.props.childs) {return}
       let items = this.state.items.slice();
       const index = items.findIndex((item) => {
         return item.uid == uid

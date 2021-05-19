@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react"
 import ReactDOM from "react-dom";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useParams, Link } from "react-router-dom";
 import axios from 'axios';
 import ImageGallery from '../../components/image_gallery/imageGallery'
 
@@ -14,7 +14,7 @@ const AlbumPage = ({user, APIpath}) => {
   }
   return(
     <div>
-      
+      <Link to={`/${user.userName}/edit-photo-book/${albumName}/template0`}>{`edit ${albumName} photo-book`}</Link>
       {renderGallery()}
     </div>
   )

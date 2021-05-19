@@ -1,13 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link,
-  useRouteMatch,
-  useParams
-} from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import UploadImages from '../../components/upload_images/uploadImages';
 import ImageGallery from '../../components/image_gallery/imageGallery';

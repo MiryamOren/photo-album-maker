@@ -1,5 +1,4 @@
 import React from 'react';
-import Boxable from './Boxable';
 import Box from './Box';
 import './DragThingsToBoxesDemo.css';
 
@@ -12,15 +11,10 @@ export default class DragThingsToBoxesDemo extends React.Component {
         <h2>Demo: Drag things Into and Between Boxes</h2>
         You can also drag to re-order within boxes. Note &#8759; used as drag handles.
         <div className="things_to_drag">
-          <Boxable targetKey="box" label="bananas"  image={imgSrc}/>
-          <Boxable targetKey="box" label="cheeseburger"  image={imgSrc}/>
-          <Boxable targetKey="box" label="orange" image={imgSrc}/>
-          <Boxable targetKey="box" label="pickle" image={imgSrc}/>
-          <Boxable targetKey="box" label="gorilla" image={imgSrc}/>
-          <Boxable targetKey="box" label="puppy" image={imgSrc}/>
         </div>
         <div className="boxes">
           <Box targetKey="box" childs={true}/>
+          <Box targetKey="box" childs={false}/>
           <Box targetKey="box" childs={false}/>
         </div>
         <div style={{clear: 'both'}}>&nbsp;</div>

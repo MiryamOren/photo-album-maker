@@ -1,0 +1,8 @@
+.box_item_component > div {
+  height: 100%;
+  width: 100%;
+}
+.box_item_component > div > span {
+  height: 100%;
+  width: 100%;
+}
