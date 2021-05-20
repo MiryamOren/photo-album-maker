@@ -22,7 +22,7 @@ function EditPhotoBook({user, APIpath}) {
       />
       {templates[template]}
       <ReactToPrint
-          trigger={() => <button><i class="fas fa-file-pdf"></i></button>}
+          trigger={() => <button><i className="fas fa-file-pdf"></i></button>}
           content={() => reference.current}
         />
     </div>

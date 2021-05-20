@@ -48,7 +48,7 @@ function App() {
   return (
     <Router>
       <div>
-        <NavBar />
+        <NavBar setUser={setUser} user={user}/>
         <Switch>
           <Route exact path="/">
             <Redirect
