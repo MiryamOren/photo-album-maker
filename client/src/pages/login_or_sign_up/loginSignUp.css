@@ -1,0 +1,36 @@
+.login-sign-up{
+  /* background: url(https://c.stocksy.com/a/QgE600/z9/1486414.jpg) no-repeat center center/cover; */
+  background: url(https://www.kindercare.com/-/media/contenthub/images/article-images/child%20development/brain%20development/picture%20this%20why%20books%20with%20real%20photos%20help%20kids%20discover%20the%20big%20wide%20world/looking-at-a-book-compressor.jpg) no-repeat center center/cover;
+}
+
+.login-form, .sign-up-form{
+  display: flex;
+  flex-direction: column;
+  max-width: 20rem;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.59);
+  padding: 2rem;
+  height: 100%;
+  color: #fff;
+}
+.login-form h2, .sign-up-form h2{
+  margin: 2rem 0;
+  text-align: center;
+}
+.login-form input, .sign-up-form input {
+  border: none;
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+}
+.login-form button, .sign-up-form button{
+  padding: 0.5rem 1rem;
+  margin: 1rem 0;
+  border-radius: 10px;
+  border: none;
+  background-color: #000;
+  color: #fff;
+}
+.login-form .switch, .sign-up-form .switch{
+  background-color: transparent;
+}

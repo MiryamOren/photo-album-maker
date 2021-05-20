@@ -1,0 +1,10 @@
+.NavBar{
+  height: 4rem;
+  background-color: black;
+}
+.NavBar img {
+  height: 3rem;
+  background-color: #fff;
+  width: 3rem;
+  margin: 0.5rem;
+}

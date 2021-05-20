@@ -1,0 +1,25 @@
+.home h1{
+  text-align: center;
+  padding: 2rem;
+}
+.home_main{
+  display: flex;
+  width: 100%;
+}
+.home_albums-list{
+  width: 10%;
+  list-style: none;
+  padding: 1rem;
+  line-height: 3rem;
+  font-size: 1rem;
+  color: #000;
+}
+.home_albums-list li a{
+  color: #000;
+  text-decoration: none;
+}
+.home_image-gallery{
+  width: 90%;
+
+  /* border: chartreuse solid 2px; */
+}

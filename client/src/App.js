@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import './normalize.css v8.0.1.css'
 import './App.css';
 import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
@@ -13,11 +14,12 @@ import {
 } from "react-router-dom";
 import axios from "axios";
 import Redirect from './pages/redirect/redirect'
+import NavBar from './components/NavBar/NavBar'
 import Home from './pages/home/home'
 import AlbumPage from './pages/album_page/albumPage'
-import Albums from './pages/albums/albums'
-// import DragAndDrop from './components/test'
-import DragThingsToBoxesDemo from './DnD/DragThingsToBoxesDemo'
+// import Albums from './pages/albums/albums'
+// // import DragAndDrop from './components/test'
+// import DragThingsToBoxesDemo from './DnD/DragThingsToBoxesDemo'
 import EditPhotoBook from './pages/edit_photo_book/editPhotoBook'
 function App() {
   const APIpath = process.env.NODE_ENV === 'production' ? '/api' : 'http://localhost:3001/api';
@@ -45,31 +47,12 @@ function App() {
 
   return (
     <Router>
-      {render? 
       <div>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/albums">Albums</Link>
-          </li>
-          <li>
-            <Link to="/drag-and-drop">Drag And Drop</Link>
-          </li>
-        </ul>
+        <NavBar />
         <Switch>
           <Route exact path="/">
             <Redirect
-              component={<Home user={user} APIpath={APIpath} refreshFunc={getUser}/>}
-              APIpath={APIpath}
-              user={user}
-              setUserFunc={(user) => setUser(user)}
-            />
-          </Route>
-          <Route path="/albums" exact>
-            <Redirect
-              component={<Albums user={user} APIpath={APIpath}/>}
+              component={<Home user={user} APIpath={APIpath} updateUser={setUser}/>}
               APIpath={APIpath}
               user={user}
               setUserFunc={(user) => setUser(user)}
@@ -91,11 +74,8 @@ function App() {
               setUserFunc={(user) => setUser(user)}
             />
           </Route>
-          <Route path="/drag-and-drop" exact >
-            <DragThingsToBoxesDemo />
-          </Route>
         </Switch>
-      </div> : null }
+      </div>
     </Router> 
   ); 
 

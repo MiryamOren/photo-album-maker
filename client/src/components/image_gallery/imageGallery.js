@@ -3,13 +3,16 @@ import axios from 'axios';
 import ImageCard from '../image_card/imageCard'
 import UpdateImageAlbumsForm from '../update_image_albums_form/updateImageAlbumsForm'
 import './imageGallery.css'
-function ImageGallery({imagesArr, APIpath}) {
+function ImageGallery({imagesArr, APIpath, updateUser, className}) {
+
   const [userToUpdate, setUserToUpdate] = useState(null);
   console.log(imagesArr);
+
   const deleteImage = async(imageID) => {
     const token = await localStorage.getItem("token");
     const res = await axios.patch( APIpath + '/images/delete', { imageID },
       {headers: { 'Authorization': `Bearer ${token}` }});
+    updateUser(res.data);
   }
   const putAlbums = async(image) => {
     console.log('sending albums. ablums is:')
@@ -24,11 +27,12 @@ function ImageGallery({imagesArr, APIpath}) {
     console.log(image)
     const res = await axios.patch( APIpath + '/images/put-image-albums-names', { imageID: image.imageID, albumNames: image.albums },
       {headers: { 'Authorization': `Bearer ${token}` }});
+    updateUser(res.data);
     setUserToUpdate(null);
   }
   const renderImages = () => {
     return (
-      <div className="image-gallery">
+      <div className="image-gallery_grid">
         {imagesArr.map((img, indx) => {
           const imgBuffer = Buffer.from(img.content.data).toString('base64');
           const src = `data: image/jpeg;base64,${imgBuffer}`;
@@ -38,9 +42,9 @@ function ImageGallery({imagesArr, APIpath}) {
     ) 
   }
   return(
-    <div>
+    <div className={`image-gallery ${className}`}>
       {imagesArr && renderImages()}
-      {userToUpdate && <UpdateImageAlbumsForm currentAlbums={userToUpdate.albums} putAlbumsFunc={putAlbums} imageID={userToUpdate.imageID}/>}
+      {userToUpdate && <UpdateImageAlbumsForm currentAlbums={userToUpdate.albums} putAlbumsFunc={putAlbums} imageID={userToUpdate.imageID} imageSrc={userToUpdate.imageSrc}/>}
     </div>
   )
 }

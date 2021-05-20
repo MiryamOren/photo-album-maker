@@ -26,7 +26,10 @@ const updateUserAlbums = async (userId) => {
     await doc.save();
     return doc;
   });
-  return res;
+  const updated = await User.findOne({_id : userId}).exec();
+  // console.log(updated)
+  return updated;
+  // return updated;
 }
 
 module.exports = {

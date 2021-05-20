@@ -1,0 +1,15 @@
+.edit-photo-book{
+  position: relative;
+}
+.edit-photo-book_DnD-box{
+  
+}
+.edit-photo-book button{
+  border: none;
+  font-size: 5rem;
+  position: absolute;
+  bottom: 4rem;
+  left: 29%;
+  cursor: pointer;
+  background-color: transparent;
+}

@@ -13,7 +13,7 @@ function Boxable({image, targetKey, customDragElement}){
         onDragEnd={()=>(console.log('end'))}
         onDrop={(e)=>(console.log(e))}
       >
-        <img src={image} height="45" style={{ marginLeft: 40}} alt=""/>
+        <img src={image} height="70px" style={{ marginLeft: 40}} alt=""/>
       </DragDropContainer>
     </div>
   );

@@ -21,8 +21,9 @@ router.post("/api/images/upload", auth, upload.single("image"), async (req, res)
       .png()
       .resize({ width: 150, height: 150 })
       .toBuffer();
-    await addImage(req.user._id, buffer)
-    res.send(buffer);
+    const user = await addImage(req.user._id, buffer)
+    console.log(user) //.images.length
+    res.send(user);
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -61,8 +62,12 @@ router.patch("/api/images/put-image-albums-names", auth, async (req, res) => {
   console.log(req.body)
   try {
     const user = await putImageAlbums(req.user._id ,req.body.imageID, req.body.albumNames);
-    await updateUserAlbums(req.user._id);
-    res.status(200).send(user);
+    console.log('in /api/images/put-image-albums-names user is:')
+    console.log(user)
+    const updatedUser = await updateUserAlbums(req.user._id);
+    console.log('in /api/images/put-image-albums-names user updatedUser:')
+    console.log(updatedUser)
+    res.status(200).send(updatedUser);
   } catch (err) {
     res.status(400).send(err.message);
   }
@@ -72,7 +77,11 @@ router.patch("/api/images/put-image-albums-names", auth, async (req, res) => {
 router.patch("/api/images/delete", auth, async (req, res) => {
   try {
     const result = await deleteImage(req.user._id ,req.body.imageID)
-    res.status(200).send(result);
+    // res.status(200).send(result);
+    const updatedUser = await updateUserAlbums(req.user._id);
+    console.log('in /api/images/put-image-albums-names user updatedUser:')
+    console.log(updatedUser)
+    res.status(200).send(updatedUser);
   } catch(err) {
     res.status(400).send(err.message);
   }

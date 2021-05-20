@@ -1,0 +1,23 @@
+.upload-image_input-container{
+  position: relative;
+}
+.upload-image_input-container_img-icon i{
+  font-size: 5rem;
+}
+.upload-image_input-container_plus-icon i{
+  font-size: 2.5rem;
+  position: absolute;
+  left: 3.5rem;
+  bottom: 0rem;
+  fill: #fff;
+  background-color: #fff;
+  border-radius: 50%;
+}
+.upload-image_input{
+  height: 5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  opacity: 0;
+}

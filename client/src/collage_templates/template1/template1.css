@@ -1,8 +1,9 @@
 .collage-template1{
   position: relative;
-  height:70vh;
-  width: 80%;
+  height:30rem;
+  width: calc(30rem * 1.414);
   margin: auto;
+  padding: 2rem;
 }
 .collage-template1_grid {
   display: grid;

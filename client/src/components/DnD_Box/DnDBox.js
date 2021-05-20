@@ -4,7 +4,7 @@ import BoxItem from '../DnD_Box_Item/DnDBoxItem';
 import Boxable from '../DnD_Boxable/DnDBoxable';
 var shortid = require('shortid');
 
-function DnDBox ({boxablesArr, height, width, targetKey, name, className, imgStyle}) {
+function DnDBox ({boxablesArr, targetKey, name, className, imgStyle}) {
   const [item, setItem] = useState(null);
 
   const handleDrop = (e) => {

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react"
 import axios from 'axios'
-
-const ReactUploadImage = ({user, reRender, APIpath})=>{
-    const [image, setImage]= useState(null)
+import './uploadImages.css'
+const ReactUploadImage = ({user, updateUser, APIpath})=>{
     
-    const handleUpload= async () => {
+    const handleUpload = async (image) => {
         const formData = new FormData();
         formData.append('image',image);
         // formData.append('userName',user.userName);
@@ -20,13 +19,16 @@ const ReactUploadImage = ({user, reRender, APIpath})=>{
             }
         );
         console.log(response)
-        reRender()
+        updateUser(response.data)
     }
-    return <div>
-        <input onChange={(e)=>{
-            setImage(e.target.files[0])
-        }} type="file"/>
-        <button onClick={handleUpload}>upload</button>
+    return <div className="upload-image">
+        <div className="upload-image_input-container">
+            <span className="upload-image_input-container_img-icon"><i className="far fa-image"></i></span>
+            <span className="upload-image_input-container_plus-icon"><i className="fas fa-plus-circle"></i></span>
+            <input className="upload-image_input" onChange={(e)=> {
+                handleUpload(e.target.files[0]);
+            }} type="file"/>
+        </div>
     </div>
 
 }

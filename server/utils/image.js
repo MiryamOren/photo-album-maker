@@ -5,15 +5,18 @@ const addImage = async (_id, imgBuffer) => {
   try{
     User.findOneAndUpdate({_id}, { $push: { images: image } }, (error, doc) => {
       if (error) {
-        console.log(error)
+        throw new Error(err);
       }
       if (doc) {
         console.log(doc)
       }
     });
+    const updated = await User.findOne({_id}).exec();
+    return updated;
   } catch (err) {
     throw new Error(err);
   }
+
 };
 
 const getAlbumImages = async (_id, albumName) => {
@@ -41,7 +44,9 @@ const addImageToAlbum = async (userID ,imageID, albumName) => {
           }
       });
     if (!user) { throw new Error('user not found')};
-    return user;
+    // return user;
+    const updated = await User.findOne({_id : userId}).exec();
+    return updated;
 
   } catch (err) {
     return err
@@ -82,7 +87,8 @@ const deleteImage = async (userID ,imageID) => {
           }
       });
     if (!user) { throw new Error('user not found')};
-    return user;
+    const updated = await User.findById(userID)
+    return updated;
 
   } catch (err) {
     return err

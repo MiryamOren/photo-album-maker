@@ -9,6 +9,12 @@ class Template1 extends React.Component {
   render() {
     return (
       <div className="collage-template1">
+        <style type="text/css" media="print">{"\
+          @page {\ size: landscape;\ }\
+        "}</style>
+        <style type="text/css" media="print">{"\
+          @page {\ size: 180mm 130mm;\ }\
+        "}</style>
         <div className="collage-template1_grid">
           <div className="box1-warp">
             <DnDBox boxablesArr={null} targetKey="box" name="box" className="collage-template1_box box1"/>

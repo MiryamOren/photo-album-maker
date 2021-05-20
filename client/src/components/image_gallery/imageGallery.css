@@ -1,4 +1,11 @@
 .image-gallery{
+  position: relative;
+  padding: 2rem 0;
+}
+.image-gallery_grid{
+  width: 100%;
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
+  
 }

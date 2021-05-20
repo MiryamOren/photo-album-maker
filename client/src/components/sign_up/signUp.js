@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios";
 import InputWithLabale from '../input_with_labal/inputWithLabel'
-function SignUp({ APIpath, setUserFunc }) {
+function SignUp({ APIpath, setUserFunc, setLoginOrSignUp}) {
   const [user, setUser] = useState({});
   const signUp = async() => {
     try{
@@ -30,7 +30,8 @@ function SignUp({ APIpath, setUserFunc }) {
         inputType="password" 
         callback={value => setUser({...user, password: value})}
       />
-      <button onClick={signUp}>Log in</button>
+      <button onClick={signUp}>Sign up</button>
+      <button className="switch" onClick={() => setLoginOrSignUp('login')}>Already have an account? Log in</button>
     </div>
   )
 }

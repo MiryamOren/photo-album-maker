@@ -1,0 +1,20 @@
+.album-page h1{
+  text-align: center;
+}
+.album-page_link{
+  position: relative;
+  margin: 0 4rem;
+}
+.album-page_link_images-icon{
+  font-size: 5rem;
+  color: #000;
+}
+.album-page_link_pencil-icon{
+  font-size: 2.5rem;
+  position: absolute;
+  right: -1rem;
+  bottom: 0.5rem;
+  color: #000;
+  text-shadow: 1px 2px #fff;
+  background-color: red;
+}

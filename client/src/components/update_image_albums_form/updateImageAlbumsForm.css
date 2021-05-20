@@ -1,0 +1,75 @@
+.update-image-albums-form-wrapper{
+  position: absolute;
+  top:0;
+  background-color: rgba(0, 0, 0, 0.247);
+  height: 100%;
+  width: calc(100% - 4rem);
+  border-radius: 2rem;
+  margin: 0 2rem;
+  padding: 2rem;
+}
+.update-image-albums-form{
+  max-width: 40rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #ce97b0;
+  color: #000;
+  padding: 3rem 2rem;
+  border-radius: 2rem;
+}
+.update-image-albums-form img {
+  border-radius: 2rem;
+}
+.update-image-albums-form_albums{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 2rem 0;
+}
+.update-image-albums-form_albums label{
+  font-weight: bold;
+}
+.update-image-albums-form_current-albums{
+  width: 70%;
+}
+
+.update-image-albums-form ul{
+  list-style: none;
+  line-height: 2rem;
+  /* font-size: 1.2rem; */
+}
+
+.update-image-albums-form_new-album button{
+  font-size: 2rem;
+}
+
+.update-image-albums-form button {
+  background-color: transparent;
+  color: #000;
+  padding: 0.2rem 0.1rem;
+  /* margin-left: 1rem; */
+  border: none;
+  cursor: pointer;
+}
+.update-image-albums-form .circ-btn {
+  background-color: transparent;
+  color: #000;
+  border: #000 solid 2px;
+  padding: 0.5rem 1rem;
+  /* margin-left: 1rem; */
+  border-radius: 3rem;
+}
+.update-image-albums-form input {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  margin: 1rem 0;
+}
+
+.update-image-albums-form_btns{
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
