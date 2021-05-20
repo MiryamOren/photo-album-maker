@@ -20,6 +20,11 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/public")));
 }
 
+app.get("*", (request, response) => {
+  response.sendFile(path.join(__dirname, "client/build", "index.html"));
+});
+
+
 const port = process.env.PORT || 3001;
 
 app.listen(port, () => {

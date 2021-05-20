@@ -20,9 +20,6 @@ function NavBar({user, setUser}) {
     <li>
       <Link to="/">
         <img src="./static/logo.png" alt=""/>
-        <div 
-        style={{background: "url('./static/logo.png') no-repeat center center/cover", height:"3rem", width: "3rem"}}>
-        </div>
       </Link>
     </li>
     {user &&
