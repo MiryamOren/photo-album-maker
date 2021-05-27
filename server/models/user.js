@@ -11,7 +11,22 @@ const ImageSchema = new mongoose.Schema({
   albumsNames: [{
     type: String
   }]
-})
+});
+
+const CollageSchema = new mongoose.Schema({
+  albumName: {
+    type: String,
+    required: true,
+  },
+  template: {
+    type: Number,
+    required: true,
+  },
+  imagesPositions: [{
+    type: String,
+  }]
+});
+
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
@@ -49,6 +64,7 @@ const userSchema = new mongoose.Schema({
       },
     },
   ],
+  collages: [CollageSchema],
 });
 
 // hash the password

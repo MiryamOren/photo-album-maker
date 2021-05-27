@@ -4,16 +4,21 @@ import BoxItem from '../DnD_Box_Item/DnDBoxItem';
 import Boxable from '../DnD_Boxable/DnDBoxable';
 var shortid = require('shortid');
 
-function DnDBox ({boxablesArr, targetKey, name, className, imgStyle}) {
-  const [item, setItem] = useState(null);
+function DnDBox ({boxItemData, boxablesArr, targetKey, name, className, imgStyle, indx, updatePositions}) {
+  console.log(boxItemData)
+  const initialItem = boxItemData? {uid: shortid.generate(), image: boxItemData} : null;
+  const [item, setItem] = useState(initialItem);
+  console.log(item)
 
   const handleDrop = (e) => {
     const newItem = { uid: shortid.generate(), image: e.dragData.image};
+    if (updatePositions) updatePositions(indx, e.dragData.image);
     console.log('in box handleDrop, event is')
     console.log(e.dragData.image)
     setItem(newItem);
   }
   const kill = () => {
+    if (updatePositions) updatePositions(indx, null);
     setItem(null)
   }
 
@@ -23,6 +28,7 @@ function DnDBox ({boxablesArr, targetKey, name, className, imgStyle}) {
       // const item = {label: dragData.label, uid: shortid.generate()};
       // items.splice(toIndex, 0, item);
       setItem(null)
+      if (updatePositions) {updatePositions(indx, dragData.image)};
       setItem({ uid: shortid.generate(), image: dragData.image})
     };
 

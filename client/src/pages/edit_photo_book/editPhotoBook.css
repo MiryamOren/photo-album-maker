@@ -1,8 +1,14 @@
 .edit-photo-book{
   position: relative;
 }
+.edit-photo-book h2{
+  text-align: center;
+  margin: 2rem;
+  font-size: 3rem;
+}
 .edit-photo-book_DnD-box{
-  
+  display: flex;
+  justify-content: space-evenly;
 }
 .edit-photo-book button{
   border: none;

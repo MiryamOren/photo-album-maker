@@ -1,7 +1,7 @@
 import React from 'react';
 import { DragDropContainer, DropTarget } from 'react-drag-drop-container';
 import './DnDBoxItem.css'
-function BoxItem({image, imgStyle, swap, index, uid, kill}) {
+function BoxItem({image, imageId, imgStyle, swap, index, uid, kill}) {
   console.log('in box item, image is')
   console.log(image)
 
@@ -29,7 +29,7 @@ function BoxItem({image, imgStyle, swap, index, uid, kill}) {
           onHit={handleDrop}
           targetKey="boxItem"
         >
-          <img className="grabber" src={image} alt="" height="100%" width="100%" style={imgStyle}/>
+          <img className="grabber" src={image.imageSrc} alt="" height="100%" width="100%" style={imgStyle}/>
       </DropTarget>
     </DragDropContainer>
   </div>
