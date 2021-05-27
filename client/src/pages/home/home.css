@@ -20,6 +20,7 @@
 }
 .home_image-gallery{
   width: 90%;
-
-  /* border: chartreuse solid 2px; */
+}
+.home_aside{
+  width: 10%;
 }

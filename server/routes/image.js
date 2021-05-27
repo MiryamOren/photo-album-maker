@@ -1,5 +1,7 @@
 const express = require('express')
 const sharp = require('sharp');
+const TeachableMachine = require("@sashido/teachablemachine-node");
+const path = require('path');
 const auth = require('../middleware/authentication')
 const upload = require('../middleware/multer');
 const {
@@ -17,12 +19,30 @@ const router = express.Router();
 // >>>>>>>>>>>> Upload Image <<<<<<<<<<<<<< //
 router.post("/api/images/upload", auth, upload.single("image"), async (req, res) => {
   try {
+    // const model = new TeachableMachine({
+    //   modelUrl: "https://teachablemachine.withgoogle.com/models/yU8JOOrbG/"
+    // });
+    // const imageSrc = "https://static.toiimg.com/photo/msid-67586673/67586673.jpg?3918697"
+    // const b = Buffer.from(req.file.buffer).toString('base64');
+    // const src = `data:image/jpeg;base64,${b}`;
+    // // console.log(src)
+    // let url = new URL(src);
+    // // console.log(url.toString())
+    // console.log(path.join(__dirname, '../../images/cats/1.jpeg'))
+    // const prediction = model.inference({
+    //   imageUrl: req.file//Buffer.from(req.file.buffer).toString('base64'),
+    // }).then((predictions) => {
+    //   console.log('-----------predictions-----------')
+    //   console.log(predictions);
+    //   // return res.json(predictions);
+    // }).catch((e) => {
+    //   console.error(e);
+    // })
     const buffer = await sharp(req.file.buffer)
       .png()
       .resize({ width: 150, height: 150 })
       .toBuffer();
     const user = await addImage(req.user._id, buffer)
-    console.log(user) //.images.length
     res.send(user);
   } catch (err) {
     res.status(400).send(err.message);

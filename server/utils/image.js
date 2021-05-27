@@ -8,10 +8,11 @@ const addImage = async (_id, imgBuffer) => {
         throw new Error(err);
       }
       if (doc) {
-        console.log(doc)
+        // console.log(doc)
       }
     });
-    const updated = await User.findOne({_id}).exec();
+    const updated = await User.findOne({_id}) //.exec();
+    console.log(updated);
     return updated;
   } catch (err) {
     throw new Error(err);

@@ -24,7 +24,7 @@ function NavBar({user, setUser}) {
     </li>
     {user &&
     <li>
-      <i class="fas fa-sign-out-alt" onClick={() => logOut()}></i>
+      <i className="fas fa-sign-out-alt" onClick={() => logOut()}></i>
     </li>}
   </ul>
   );
